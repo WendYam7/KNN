@@ -1,0 +1,97 @@
+import pandas as pd
+import numpy as np
+import seaborn as sns
+from sklearn.model_selection import train_test_split
+from sklearn.linear_model import LinearRegression
+from sklearn.neighbors import KNeighborsClassifier
+from sklearn.metrics import accuracy_score
+knn=KNeighborsClassifier(n_neighbors=5)
+knn.fit(x_train,y_train)
+y_pred=knn.predict(x_test)
+print("Accuracy=",accuracy_score(y_pred,y_test))
+    
+from sklearn import metrics
+from sklearn.metrics import mean_squared_error
+data=pd.read_csv("C:\\Users\\soube\\Downloads\\iris.data.txt")
+data['Iris-setosa']=data['Iris-setosa'].map({'Iris-setosa':0,'Iris-versicolor':1,'Iris-virginica':2})
+y=data['Iris-setosa']
+x=data[['5.1','3.5','1.4','0.2']]
+x_train,x_test,y_train,y_test=train_test_split(x,y,test_size=0.30,random_state=30)
+ 
+
+
+
+
+
+
+
+import csv
+with open('C:\\Users\\soube\\Downloads\\iris.data.txt','r') as csvfile:
+	lines = csv.reader(csvfile)
+	for row in lines :
+		print (', '.join(row))
+import csv
+import random
+def loadDataset(filename, split, trainingSet=[] , testSet=[]):
+	with open(filename, 'r') as csvfile:
+	    lines = csv.reader(csvfile)
+	    dataset = list(lines)
+	    for x in range(len(dataset)-1):
+	        for y in range(4):
+	            dataset[x][y] = float(dataset[x][y])
+	        if random.random() < split:
+	            testSet.append(dataset[x])
+	        else:
+	            trainingSet.append(dataset[x])
+            
+trainingSet=[]
+testSet=[]
+loadDataset("C:\\Users\\soube\\Downloads\\iris.data.txt", 0.7,trainingSet,testSet)
+print ('Train: ' + repr(len(trainingSet)))
+print ('Test: ' + repr(len(testSet)))   
+import math
+def euclideanDistance(L1, L2, length):
+    x=0
+    S=0
+    for i in range(length):
+        x=(L1[i]-L2[i])*(L1[i]-L2[i])
+        S=S+x
+    return sqrt(S)    
+import operator
+def getNeighbors(trainingSet, testInstance, k):
+
+	distances = []
+
+	length = len(testInstance)-1
+
+	for x in range(len(trainingSet)):
+
+		dist = euclideanDistance(testInstance, trainingSet[x], length)
+
+		distances.append((trainingSet[x], dist))
+
+	distances.sort(key=operator.itemgetter(1))
+
+	neighbors = []
+
+	for x in range(k):
+
+		neighbors.append(distances[x][0])
+	return neighbors
+import operator
+
+def getResponse(neighbors):
+
+	classVotes = {}
+
+	for x in range(len(neighbors)):
+
+		response = neighbors[x][ ? ] %complete with appropriate number
+
+		if response in classVotes:
+
+			Complete the if clause			
+
+	sortedVotes = sorted(classVotes.iteritems(), key=operator.itemgetter(1), reverse=True)
+
+	return sortedVotes[0][0]
